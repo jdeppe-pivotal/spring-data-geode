@@ -28,6 +28,7 @@ import java.util.Optional;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.execute.Function;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.gemfire.config.admin.GemfireAdminOperations;
 import org.springframework.data.gemfire.config.schema.definitions.IndexDefinition;
 import org.springframework.data.gemfire.config.schema.definitions.RegionDefinition;
@@ -307,6 +308,29 @@ public class RestHttpGemfireAdminTemplate extends FunctionGemfireAdminTemplate {
 
 	protected URI resolveCreateRegionUri() {
 		return URI.create(getManagementRestApiUrl().concat("/regions"));
+	}
+
+	@Override
+	public void deploy(List<String> jars) {
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+		MultiValueMap<String, Object> requestParameters = new LinkedMultiValueMap<>();
+		requestParameters.add("cmd", "deploy --jar=" +
+				String.join(",", jars));
+		jars.forEach(j -> requestParameters.add("resources", new FileSystemResource(j)));
+
+		RequestEntity<MultiValueMap<String, Object>> requestEntity =
+				new RequestEntity<>(requestParameters, httpHeaders, HttpMethod.POST, resolveCommandUri());
+
+		ResponseEntity<String> response = getRestOperations().exchange(requestEntity, String.class);
+
+		// TODO do something with the result; e.g. log when failure (or when not "OK")
+		HttpStatus.OK.equals(response.getStatusCode());
+	}
+
+	protected URI resolveCommandUri() {
+		return URI.create(getManagementRestApiUrl().concat("/management/commands"));
 	}
 
 	public static class Builder {

@@ -18,6 +18,8 @@ package org.springframework.data.gemfire.config.schema;
 
 import static java.util.Arrays.stream;
 
+import org.springframework.data.gemfire.config.schema.support.DeploymentCollection;
+
 import org.apache.geode.cache.Cache;
 import org.apache.geode.cache.DiskStore;
 import org.apache.geode.cache.Region;
@@ -63,6 +65,7 @@ public enum SchemaObjectType {
 	LUCENE_INDEX(LuceneIndex.class),
 	POOL(Pool.class),
 	REGION(Region.class),
+	DEPLOYMENT(DeploymentCollection.class),
 	UNKNOWN(Void.class);
 
 	private final Class<?> objectType;

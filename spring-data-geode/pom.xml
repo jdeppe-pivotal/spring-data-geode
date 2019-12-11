@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.root>${basedir}/..</project.root>
-		<geode.version>1.10.0</geode.version>
+		<geode.version>1.11.0</geode.version>
 	</properties>
 
 	<dependencies>
@@ -64,6 +64,36 @@
 			<version>${geode.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-serialization</artifactId>
+			<version>${geode.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-logging</artifactId>
+			<version>${geode.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-web</artifactId>
+			<version>${geode.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geode</groupId>
+			<artifactId>geode-http-service</artifactId>
+			<version>${geode.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.classgraph</groupId>
+			<artifactId>classgraph</artifactId>
+			<version>4.8.52</version>
+		</dependency>
 		<!-- Java & Javax -->
 		<dependency>
 			<groupId>javax.cache</groupId>

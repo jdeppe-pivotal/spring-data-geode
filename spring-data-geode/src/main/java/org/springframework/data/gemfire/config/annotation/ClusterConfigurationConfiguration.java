@@ -53,6 +53,8 @@ import org.springframework.data.gemfire.config.schema.definitions.RegionDefiniti
 import org.springframework.data.gemfire.config.schema.support.ClientRegionCollector;
 import org.springframework.data.gemfire.config.schema.support.ComposableSchemaObjectCollector;
 import org.springframework.data.gemfire.config.schema.support.ComposableSchemaObjectDefiner;
+import org.springframework.data.gemfire.config.schema.support.DeploymentCollector;
+import org.springframework.data.gemfire.config.schema.support.DeploymentDefiner;
 import org.springframework.data.gemfire.config.schema.support.IndexCollector;
 import org.springframework.data.gemfire.config.schema.support.IndexDefiner;
 import org.springframework.data.gemfire.config.schema.support.RegionDefiner;
@@ -391,7 +393,8 @@ public class ClusterConfigurationConfiguration extends AbstractAnnotationConfigS
 
 		return ComposableSchemaObjectCollector.compose(
 			new ClientRegionCollector(),
-			new IndexCollector()
+			new IndexCollector(),
+		  new DeploymentCollector()
 		);
 	}
 
@@ -406,7 +409,8 @@ public class ClusterConfigurationConfiguration extends AbstractAnnotationConfigS
 
 		return ComposableSchemaObjectDefiner.compose(
 			new RegionDefiner(resolveServerRegionShortcut()),
-			new IndexDefiner()
+			new IndexDefiner(),
+			new DeploymentDefiner()
 		);
 	}
 

@@ -20,6 +20,8 @@ import static java.util.Arrays.stream;
 import static org.springframework.data.gemfire.util.ArrayUtils.nullSafeArray;
 import static org.springframework.data.gemfire.util.CollectionUtils.nullSafeIterable;
 
+import java.util.List;
+
 import org.apache.geode.cache.DiskStore;
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.lucene.LuceneIndex;
@@ -139,4 +141,6 @@ public interface GemfireAdminOperations {
 	default void createDiskStores(Iterable<SchemaObjectDefinition> diskStoreDefinitions) {
 		nullSafeIterable(diskStoreDefinitions).forEach(this::createDiskStore);
 	}
+
+	void deploy(List<String> jarsToDeploy);
 }

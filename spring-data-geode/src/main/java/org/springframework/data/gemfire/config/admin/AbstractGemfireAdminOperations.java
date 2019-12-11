@@ -16,6 +16,8 @@
 
 package org.springframework.data.gemfire.config.admin;
 
+import java.util.List;
+
 import org.apache.geode.cache.DiskStore;
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.lucene.LuceneIndex;
@@ -115,6 +117,11 @@ public class AbstractGemfireAdminOperations implements GemfireAdminOperations {
 	 */
 	@Override
 	public void createDiskStore(SchemaObjectDefinition diskStoreDefinition) {
+		throw new UnsupportedOperationException(NOT_IMPLEMENTED);
+	}
+
+	@Override
+	public void deploy(List<String> jarsToDeploy) {
 		throw new UnsupportedOperationException(NOT_IMPLEMENTED);
 	}
 }
